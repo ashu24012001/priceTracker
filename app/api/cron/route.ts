@@ -9,19 +9,19 @@ export const maxDuration = 59;
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
         connectToDB();
 
         const products = await Product.find({});
 
-        if(!products) return;
+        if(!products) throw new Error("No Product fetched");
 
         const updatedProducts = await Promise.all(
             products.map(async(currentProduct) => {
                 const scrapedProduct = await scrapedAmazonProduct(currentProduct.url);
 
-                if(!scrapedProduct) throw new Error("No Product Found!");
+                if(!scrapedProduct) return;
 
                     const updatedPriceHistory = [
                         ...currentProduct.priceHistory,
@@ -38,7 +38,9 @@ export async function GET() {
                 
                 
                 const updatedProduct = await Product.findOneAndUpdate(
-                    {url: product.url}, 
+                    {
+                        url: product.url, 
+                    },                    
                     product,
                 );
 
@@ -53,17 +55,17 @@ export async function GET() {
 
                     const emailContent = await generateEmailBody(productInfo, emailNotifType);
 
-                    const userEmail = updatedProduct.users.map((user: any) => user.email);
+                    const userEmails = updatedProduct.users.map((user: any) => user.email);
 
-                    await sendEmail(emailContent, userEmail);
+                    await sendEmail(emailContent, userEmails);
                 }
-                return updatedProduct
+                return updatedProduct;
             })
-        )
+        );
 
         return NextResponse.json({
             message: "Ok", data: updatedProducts
-        })
+        });
     } catch(err: any) {
         throw new Error(err.message);
     }
