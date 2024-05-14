@@ -8,6 +8,8 @@ import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 
+export const maxDuration = 100;
+
 export async function scrapeAndStoreProduct(productUrl: string) {
     if(!productUrl) return;
 
