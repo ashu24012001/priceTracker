@@ -5,6 +5,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { FormEvent, Fragment, useState } from 'react'
 
+export const maxDuration = 59;
+
 interface Props {
   productId: any
 }
