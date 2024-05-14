@@ -7,8 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export const maxDuration = 59;
-
 type Props = {
   params: {id: String}
 }
