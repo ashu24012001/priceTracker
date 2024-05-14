@@ -4,6 +4,8 @@ import Image from "next/image"
 import { getAllProducts } from "@/lib/actions";
 import ProductCard from "@/components/ProductCard";
 
+export const maxDuration = 100;
+
 const Home = async() => {
   const allProducts = await getAllProducts();
 
