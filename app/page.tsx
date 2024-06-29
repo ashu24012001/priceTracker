@@ -4,6 +4,9 @@ import Image from "next/image"
 import { getAllProducts } from "@/lib/actions";
 import ProductCard from "@/components/ProductCard";
 
+
+export const maxDuration = 300; // This function can run for a maximum of 300 seconds
+
 const Home = async() => {
   const allProducts = await getAllProducts();
 
