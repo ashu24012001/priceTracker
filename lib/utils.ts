@@ -1,6 +1,8 @@
 import { PriceHistoryItem, Product } from "@/types";
 import { Console } from "console";
 
+export const maxDuration = 59; // This function can run for a maximum of 300 seconds
+
 const Notification = {
   WELCOME: 'WELCOME',
   CHANGE_OF_STOCK: 'CHANGE_OF_STOCK',

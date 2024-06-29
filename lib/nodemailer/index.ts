@@ -3,6 +3,8 @@
 import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
 import nodemailer from "nodemailer";
 
+export const maxDuration = 59; // This function can run for a maximum of 300 seconds
+
 const Notification = {
     WELCOME: "WELCOME",
     CHANGE_OF_STOCK: "CHANGE_OF_STOCK",
